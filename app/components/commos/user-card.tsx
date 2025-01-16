@@ -16,7 +16,7 @@ export default function UserCard(){
       </div>
       <div className="flex flex-col p-3 gap-2 w-full">
         <div className="flex items-center gap-2">
-          <h3 className="text-3xl font-bold min-w-0 overflow-hidden">Caio Santos</h3>
+          <h3 className="text-3xl font-bold min-w-0 overflow-hidden">André Dev</h3>
         </div>
         <p className="opacity-40">
           "Eu faço produtos para a internet"
