@@ -1,8 +1,12 @@
 import ProjectCard from "@/app/components/commos/project-card";
 import TotalVisits from "@/app/components/commos/total-visits";
 import UserCard from "@/app/components/commos/user-card";
-import { Plus } from "lucide-react";
+import { auth } from "@/app/lib/auth";
+import { getProfileData, getProfileProjects } from "@/app/server/get-profile";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import NewProject from "./new-project";
+import { getDownloadURLFromPath } from "@/app/lib/firebase";
 
 export default async function ProfilePage ({ 
   params 
@@ -11,6 +15,23 @@ export default async function ProfilePage ({
 }){
 
   const { profileId } = await params
+
+  const profileData = await getProfileData(profileId)
+
+  if(!profileData) return notFound();
+
+  
+  const session = await auth()
+  
+  const isOwner = profileData.userId === session?.user?.id
+
+  // TODO: get projects
+  const projects =  await getProfileProjects(profileId)
+  console.log(projects)
+
+  // TODO: Adicionar page view
+
+  // TODO: Se o usuário nao estiver mais no trial, nao deixar ver o projeto, direcionar para o upgrade
 
   return (
     <div className="relative h-screen flex p-20 overflow-hidden">
@@ -24,18 +45,19 @@ export default async function ProfilePage ({
         <UserCard />
       </div>
       <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projects.map(async (project) => (
+          <ProjectCard 
+            key={project.id} 
+            project={project} 
+            isOwner={isOwner} 
+            img={await getDownloadURLFromPath(project.imagePath)} 
+          />
+        ))}
         
-        <button className="w-[430px] h-[132px] rounded-[20px] bg-background-secondary flex items-center gap-2 justify-center hover:border border-dashed">
-          <Plus className="size-10 text-accent-green"/>
-          <span>Novo projeto</span>
-        </button>
+        { isOwner && (
+          <NewProject profileId={profileId} />
+        )}
+        
       </div>
       <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
         <TotalVisits />
