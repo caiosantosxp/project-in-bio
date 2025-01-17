@@ -10,15 +10,18 @@
   },
   "dependencies": {
     "@auth/firebase-adapter": "^2.7.2",
+    "@next/third-parties": "^15.1.5",
     "@stripe/stripe-js": "^5.5.0",
     "browser-image-compression": "^2.0.2",
     "clsx": "^2.1.1",
     "firebase-admin": "^12.6.0",
     "lucide-react": "^0.471.1",
+    "mixpanel": "^0.18.0",
     "next": "15.1.4",
     "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^4.1.1",
     "stripe": "^17.5.0",
     "tailwind-merge": "^2.6.0"
   },

@@ -1,4 +1,5 @@
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { Red_Hat_Display } from 'next/font/google'
 
@@ -19,6 +20,7 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <GoogleAnalytics gaId="G-Z4957568JG" />
     </html>
   );
 }

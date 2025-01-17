@@ -3,8 +3,14 @@ import Button from "@/app/components/ui/button";
 import TextInput from "@/app/components/ui/text-input";
 import { Rocket } from "lucide-react";
 import CreateLinkForm from "./create-link-form";
+import { trackServerEvent } from "@/app/lib/mixpanel";
 
 export default function CriarPage(){
+
+  trackServerEvent('page_view', {
+      page: 'home'
+    })
+
   return (
     <div>
         <Header />
