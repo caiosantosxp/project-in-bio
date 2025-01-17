@@ -1,12 +1,13 @@
-import ProjectCard from "@/app/components/commos/project-card";
-import TotalVisits from "@/app/components/commos/total-visits";
-import UserCard from "@/app/components/commos/user-card";
+import ProjectCard from "@/app/components/commons/project-card";
+import TotalVisits from "@/app/components/commons/total-visits";
+import UserCard from "@/app/components/commons/user-card/user-card";
 import { auth } from "@/app/lib/auth";
-import { getProfileData, getProfileProjects } from "@/app/server/get-profile";
+import { getProfileData, getProfileProjects } from "@/app/server/get-profile-data";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import NewProject from "./new-project";
 import { getDownloadURLFromPath } from "@/app/lib/firebase";
+import { increaseProfileVisits } from "@/app/actions/increase-profile-visits";
 
 export default async function ProfilePage ({ 
   params 
@@ -22,27 +23,35 @@ export default async function ProfilePage ({
 
   
   const session = await auth()
+
+  console.log(session)
+  
+  const projects =  await getProfileProjects(profileId)
   
   const isOwner = profileData.userId === session?.user?.id
 
-  // TODO: get projects
-  const projects =  await getProfileProjects(profileId)
-  console.log(projects)
+  if(isOwner && !session.user.isSubscribed && !session.user.isTrial){
+    redirect(`/${profileId}/upgrade`)
+  }
 
-  // TODO: Adicionar page view
+  if(!isOwner){
+    await increaseProfileVisits(profileId)
+  }
 
   // TODO: Se o usuário nao estiver mais no trial, nao deixar ver o projeto, direcionar para o upgrade
 
   return (
     <div className="relative h-screen flex p-20 overflow-hidden">
-      <div className="fixed top-0 left-0 w-full flex justify-center items-center gap-1 py-2 bg-background-tertiary">
+      {session?.user?.isTrial && !session?.user?.isSubscribed && (
+        <div className="fixed top-0 left-0 w-full flex justify-center items-center gap-1 py-2 bg-background-tertiary">
         <span>Você está usando a versão trial.</span>
         <Link href={`/${profileId}/upgrade`}>
         <button className="text-accent-green font-bold">Faça o upgrade agora!</button>
         </Link>
       </div>
+      )}
       <div className="w-1/2 flex justify-center h-min">
-        <UserCard />
+        <UserCard profileData={profileData} isOwner={isOwner} />
       </div>
       <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
         {projects.map(async (project) => (
@@ -59,9 +68,11 @@ export default async function ProfilePage ({
         )}
         
       </div>
-      <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
-        <TotalVisits />
-      </div>
+      {isOwner && (
+        <div className="absolute bottom-4 right-0 left-0 w-min mx-auto">
+          <TotalVisits totalVisits={profileData.totalVisits} />
+        </div>
+      )}
     </div>
   )
 }

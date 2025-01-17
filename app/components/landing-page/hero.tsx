@@ -1,7 +1,8 @@
-import ProjectCard from "../commos/project-card"
-import TotalVisits from "../commos/total-visits"
-import UserCard from "../commos/user-card"
+import ProjectCard from "../commons/project-card"
+import TotalVisits from "../commons/total-visits"
+import UserCard from "../commons/user-card/user-card"
 import Button from "../ui/button"
+import CreateNow from "../ui/create-now"
 import TextInput from "../ui/text-input"
 
 export default function Hero() {
@@ -16,23 +17,19 @@ export default function Hero() {
           <br/>
           Acompanhe o engajamento com o Analytics de cliques
         </h2>
-        <div className="flex items-center gap-2 w-full mt-[10vh]">
-          <span className="text-white text-xl">projectinbio.com/</span>
-          <TextInput placeholder="Seu link" />
-          <Button >Criar agora.</Button>
-        </div>
+        <CreateNow />
       </div>
       <div className="w-full flex items-center justify-center bg-[radial-gradient(circle_at_50%_50%,#4B2DBB,transparent_50%)]">
         <div className="relative">
-          <UserCard />
+          <UserCard name="André Dev" description="Desenvolvedor Web Full Stack" img="/me.png" hero />
           <div className="absolute bottom-[11%] -right-[28%]">
-            <TotalVisits />
+            <TotalVisits hero/>
           </div>
           <div className="absolute top-[20%] -left-[45%] -z-10">
-            <ProjectCard banner />
+            <ProjectCard name="André Dev" description="Desenvolvedor Web Full Stack" clicks="1587" img="/project2.png"/>
           </div>
           <div className="absolute -top-[5%] -left-[31%] -z-10">
-            <ProjectCard banner />
+            <ProjectCard name="André Dev" description="Desenvolvedor Web Full Stack" clicks="17" img="/project1.png"/>
           </div>
         </div>
       </div>

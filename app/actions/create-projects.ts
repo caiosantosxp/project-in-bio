@@ -28,7 +28,8 @@ export async function createProject(formData: FormData){
   const imagePath = storageRef.name;
 
   try {
-    await db.collection('projects').doc(profileId).collection('projects').doc().set({
+    await db.collection('profiles').doc(profileId).collection('projects').doc(generateId).set({
+      id: generateId,
       userId: session.user?.id,
       projectName,
       projectDescription,
@@ -36,6 +37,7 @@ export async function createProject(formData: FormData){
       imagePath,
       createdAt: Timestamp.now().toMillis()
     });
+
     console.log('aqui8')
     return true;
   } catch (error) {
