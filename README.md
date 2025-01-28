@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+<img src='public/img1.png'>
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# **Project in Bio** 🚀
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Project in Bio** é uma plataforma inovadora que permite criar uma página personalizada para exibir seus projetos e redes sociais em um único link. Ideal para desenvolvedores e profissionais que querem compartilhar seu trabalho de forma simples e eficaz.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Além disso, com o **analytics de visitas**, você pode acompanhar o engajamento com seus projetos e medir o impacto da sua presença online.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📋 **Recursos Principais**
 
-To learn more about Next.js, take a look at the following resources:
+- **Criação de Página de Projetos**: Exiba seus projetos, redes sociais e outros links em um único lugar.
+- **Analytics de Visitas**: Monitore o número de cliques e interações nos seus projetos.
+- **Fácil Criação de Projetos**: Adicione projetos com título, descrição, imagem e URL.
+- **Modo Trial e Upgrade**: Oferece opções de upgrade para acessar mais recursos e manter a página ativa.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚙️ **Tecnologias Usadas**
 
-## Deploy on Vercel
+- **Frontend**:
+  - **Next.js**: Framework React para renderização do lado do servidor.
+  - **Tailwind CSS**: Estilização responsiva e rápida.
+  - **React**: Biblioteca para interfaces interativas.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Backend**:
+  - **Node.js** com **Express**: Gerenciamento do servidor e API.
+  - **Prisma**: ORM para interação com bancos de dados SQL.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Autenticação e Armazenamento**:
+  - **Firebase**: Para autenticação de usuários e armazenamento de imagens.
+  - **Auth js**: Para autenticação de usuários.
+
+- **Outros**:
+  - **Mixpanel**: Monitoramento de eventos no servidor.
+  - **Lucide Icons**: Ícones no estilo moderno.
+  - **Stripe**: Integração de pagamento.
+  - **Resend**: Serviço de e-mail para notificações.
+
+---
+
+## 🔧 **Como Rodar o Projeto**
+
+1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/caiosantosxp/project-in-bio.git
+   cd project-in-bio
+   ```
+
+2. **Instale as dependências:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Crie o arquivo `.env` com as variáveis de ambiente do Firebase:**
+
+   ```bash
+    FIREBASE_PROJECT_ID=
+    FIREBASE_CLIENT_EMAIL=
+    FIREBASE_PRIVATE_KEY=
+    FIREBASE_STORE_BUCKET=
+
+    AUTH_GOOGLE_ID=
+    AUTH_GOOGLE_SECRET=
+    AUTH_SECRET=
+
+    STRIPE_PRICE_ID=
+    STRIPE_SUBSCRIPTION_PRICE_ID=
+    STRIPE_SECRET_KEY=
+    STRIPE_WEBHOOK_SECRET=
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+
+    RESEND_API_KEY=
+   ```
+
+4. **Execute o projeto:**
+
+   ```bash
+   npm run dev
+   ```
+
+Agora o seu projeto estará disponível em `http://localhost:3000`.
